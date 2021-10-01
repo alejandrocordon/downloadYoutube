@@ -1,3 +1,4 @@
+# remember :  pip install pytube
 from pytube import YouTube
 
 link = input("Introduce url de youtube:")
