@@ -17,6 +17,26 @@ def descargar_videos(urls, destino='.'):
     if cookies_from_browser:
         ydl_opts['cookiesfrombrowser'] = cookies_from_browser
 
+    http_headers = {}
+    user_agent = os.environ.get('YT_USER_AGENT')
+    if user_agent:
+        http_headers['User-Agent'] = user_agent
+
+    referer = os.environ.get('YT_REFERER')
+    if referer:
+        http_headers['Referer'] = referer
+
+    if http_headers:
+        ydl_opts['http_headers'] = http_headers
+
+    player_clients = os.environ.get('YT_PLAYER_CLIENTS')
+    if player_clients:
+        ydl_opts['extractor_args'] = {
+            'youtube': {
+                'player_client': [client.strip() for client in player_clients.split(',') if client.strip()],
+            },
+        }
+
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(urls)
