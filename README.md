@@ -13,9 +13,9 @@ python downloadYoutube.py
 
 ## Cookies (autenticación o evitar bloqueos)
 
-Si ya tienes un archivo de cookies llamado `cookies.txt` en la **raíz del proyecto**, entonces puedes usarlo con la variable `YT_COOKIES_FILE`.
+Si ya tienes un archivo de cookies llamado `cookies.txt` en la **raíz del proyecto**, el script lo detecta automáticamente y lo usa como cookies por defecto.
 
-- **`YT_COOKIES_FILE`** **sí** se refiere a la ruta de ese archivo (por ejemplo `./cookies.txt`).
+- **`YT_COOKIES_FILE`** **sí** se refiere a la ruta de ese archivo (por ejemplo `./cookies.txt`) y tiene prioridad sobre la detección automática.
 - **`YT_COOKIES_FROM_BROWSER`** **no** usa el archivo `cookies.txt`. Esta opción le dice a `yt-dlp` que lea las cookies directamente desde tu navegador instalado (por ejemplo `chrome` o `firefox`).
 
 ### Ejemplo usando `cookies.txt`

@@ -11,6 +11,8 @@ def descargar_videos(urls, destino='.'):
     }
 
     cookies_file = os.environ.get('YT_COOKIES_FILE')
+    if not cookies_file and os.path.isfile('cookies.txt'):
+        cookies_file = 'cookies.txt'
     if cookies_file:
         ydl_opts['cookies'] = cookies_file
 
