@@ -51,6 +51,26 @@ export YT_PLAYER_CLIENTS=web,mweb
 python downloadYoutube.py
 ```
 
+## Opciones avanzadas de `yt-dlp`
+
+Si necesitas pasar opciones adicionales que no estén cubiertas por las variables anteriores, puedes usar `YT_DLP_OPTS_JSON` con un objeto JSON.
+
+Ejemplo para forzar un cliente específico y un formato distinto:
+
+```bash
+export YT_DLP_OPTS_JSON='{\"format\":\"best\",\"extractor_args\":{\"youtube\":{\"player_client\":[\"ios\"]}}}'
+python downloadYoutube.py
+```
+
+## Solución de problemas (HTTP 403 / Signature extraction failed)
+
+Si ves errores como **HTTP 403: Forbidden** o **Signature extraction failed**, normalmente se soluciona con alguno de estos pasos:
+
+1. Usa cookies (`YT_COOKIES_FILE=./cookies.txt`) y asegúrate de que estén actualizadas.
+2. Define un `User-Agent` y `Referer` válidos (`YT_USER_AGENT`, `YT_REFERER`).
+3. Prueba con otros clientes (`YT_PLAYER_CLIENTS=ios` o `YT_PLAYER_CLIENTS=web,mweb`).
+4. Si necesitas más control, usa `YT_DLP_OPTS_JSON` para pasar opciones directamente a `yt-dlp`.
+
 ## Docker
 
 Construye y ejecuta la imagen:

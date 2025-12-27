@@ -1,3 +1,4 @@
+import json
 import os
 import yt_dlp
 
@@ -36,6 +37,18 @@ def descargar_videos(urls, destino='.'):
                 'player_client': [client.strip() for client in player_clients.split(',') if client.strip()],
             },
         }
+
+    extra_opts_json = os.environ.get('YT_DLP_OPTS_JSON')
+    if extra_opts_json:
+        try:
+            extra_opts = json.loads(extra_opts_json)
+        except json.JSONDecodeError as exc:
+            print(f"YT_DLP_OPTS_JSON no es un JSON válido: {exc}")
+        else:
+            if isinstance(extra_opts, dict):
+                ydl_opts.update(extra_opts)
+            else:
+                print("YT_DLP_OPTS_JSON debe ser un objeto JSON con opciones de yt-dlp.")
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
